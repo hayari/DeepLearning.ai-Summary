@@ -73,7 +73,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - Basically a single neuron will calculate weighted sum of input(W.T*X) and then we can set a threshold to predict output in a perceptron. If weighted sum of input cross the threshold, perceptron fires and if not then perceptron doesn't predict.
 - Perceptron can take real values input or boolean values.
 - Actually, when w⋅x+b=0 the perceptron outputs 0.
-- Disadvantage of perceptron is that it only output binary values and if we try to give small change in weight and bais then perceptron can flip the output. We need some system which can modify the output slightly according to small change in weight and bias. Here comes sigmoid function in picture.
+- Disadvantage of perceptron is that it only output binary values and if we try to give small change in weight and bias then perceptron can flip the output. We need some system which can modify the output slightly according to small change in weight and bias. Here comes sigmoid function in picture.
 - If we change perceptron with a sigmoid function, then we can make slight change in output.
 - e.g. output in perceptron = 0, you slightly changed weight and bias, output becomes = 1 but actual output is 0.7. In case of sigmoid, output1 = 0, slight change in weight and bias, output = 0.7. 
 - If we apply sigmoid activation function then Single neuron will act as Logistic Regression.
@@ -83,7 +83,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - ![](Images/Others/01.jpg)
   - Image taken from [tutorialspoint.com](http://www.tutorialspoint.com/)
 - RELU stands for rectified linear unit is the most popular activation function right now that makes deep NNs train faster now.
-- Hidden layers predicts connection between inputs automatically, thats what deep learning is good at.
+- Hidden layers predicts connection between inputs automatically, that's what deep learning is good at.
 - Deep NN consists of more hidden layers (Deeper layers)
   - ![](Images/Others/02.png)
   - Image taken from [opennn.net](http://www.opennn.net/)
@@ -174,7 +174,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - Our cost function is convex.
 - First we initialize `w` and `b` to 0,0 or initialize them to a random value in the convex function and then try to improve the values the reach minimum value.
 - In Logistic regression people always use 0,0 instead of random.
-- The gradient decent algorithm repeats: `w = w - alpha * dw`
+- The gradient descent algorithm repeats: `w = w - alpha * dw`
   where alpha is the learning rate and `dw` is the derivative of `w` (Change to `w`)
   The derivative is also the slope of `w`
 - Looks like greedy algorithms. the derivative give us the direction to improve our parameters.
@@ -182,7 +182,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 - The actual equations we will implement:
   - `w = w - alpha * d(J(w,b) / dw)`        (how much the function slopes in the w direction)
-  - `b = b - alpha * d(J(w,b) / db)`        (how much the function slopes in the d direction)
+  - `b = b - alpha * d(J(w,b) / db)`        (how much the function slopes in the b direction)
 
 ### Derivatives
 
@@ -200,7 +200,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - `a = 2.0001` ==> `f(a) = 4.0004` approx.
 - `f(a) = a^3`  ==> `d(f(a))/d(a) = 3a^2`
 - `f(a) = log(a)`  ==> `d(f(a))/d(a) = 1/a`
-- To conclude, Derivative is the slope and slope is different in different points in the function thats why the derivative is a function.
+- To conclude, Derivative is the slope and slope is different in different points in the function that's why the derivative is a function.
 
 ### Computation graph
 
@@ -219,7 +219,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 ### Logistic Regression Gradient Descent
 
-- In the video he discussed the derivatives of gradient decent example for one sample with two features `x1` and `x2`.
+- In the video he discussed the derivatives of gradient descent example for one sample with two features `x1` and `x2`.
   - ![](Images/04.png)
 
 ### Gradient Descent on m Examples
@@ -284,7 +284,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 ### Vectorization
 
-- Deep learning shines when the dataset are big. However for loops will make you wait a lot for a result. Thats why we need vectorization to get rid of some of our for loops.
+- Deep learning shines when the dataset are big. However for loops will make you wait a lot for a result. That's why we need vectorization to get rid of some of our for loops.
 - NumPy library (dot) function is using vectorization by default.
 - The vectorization can be done on CPU or GPU thought the SIMD operation. But its faster on GPU.
 - Whenever possible avoid for loops.
@@ -297,7 +297,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - We will then compute at instance `[z1,z2...zm] = W' * X + [b,b,...b]`. This can be written in python as:
 
     		Z = np.dot(W.T,X) + b    # Vectorization, then broadcasting, Z shape is (1, m)
-    		A = 1 / 1 + np.exp(-Z)   # Vectorization, A shape is (1, m)
+        A = 1 / (1 + np.exp(-Z)) # Vectorization, A shape is (1, m)
 
 - Vectorizing Logistic Regression's Gradient Output:
 
@@ -389,7 +389,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 - Equations of Hidden layers:
   - ![](Images/05.png)
-- Here are some informations about the last image:
+- Here is some information about the last image:
   - `noOfHiddenNeurons = 4`
   - `Nx = 3`
   - Shapes of the variables:
@@ -436,7 +436,7 @@ Here are the course summary as its given on the course [link](https://www.course
 ### Activation functions
 
 - So far we are using sigmoid, but in some cases other functions can be a lot better.
-- Sigmoid can lead us to gradient decent problem where the updates are so low.
+- Sigmoid can lead us to gradient descent problem where the updates are so low.
 - Sigmoid activation function range is [0,1]
   `A = 1 / (1 + np.exp(-z)) # Where z is the input matrix`
 - Tanh activation function range is [-1,1]   (Shifted version of sigmoid function)
@@ -446,8 +446,8 @@ Here are the course summary as its given on the course [link](https://www.course
     Or
     `A = np.tanh(z)   # Where z is the input matrix`
 - It turns out that the tanh activation usually works better than sigmoid activation function for hidden units because the mean of its output is closer to zero, and so it centers the data better for the next layer.
-- Sigmoid or Tanh function disadvantage is that if the input is too small or too high, the slope will be near zero which will cause us the gradient decent problem.
-- One of the popular activation functions that solved the slow gradient decent is the RELU function.
+- Sigmoid or Tanh function disadvantage is that if the input is too small or too high, the slope will be near zero which will cause us the gradient descent problem.
+- One of the popular activation functions that solved the slow gradient descent is the RELU function.
   `RELU = max(0,z) # so if z is negative the slope is 0 and if z is positive the slope remains linear.`
 - So here is some basic rule for choosing activation functions, if your classification is between 0 and 1, use the output activation as sigmoid and the others as RELU.
 - Leaky RELU activation function different of RELU is that if the input is negative the slope will be so small. It works as RELU but most people uses RELU.
@@ -593,14 +593,14 @@ Here are the course summary as its given on the course [link](https://www.course
 
   ```
   z[l] = W[l]a[l-1] + b[l]
-  a[l] = g[l](a[l])
+  a[l] = g[l](z[l])
   ```
 
 - Forward propagation general rule for `m` inputs:
 
   ```
   Z[l] = W[l]A[l-1] + B[l]
-  A[l] = g[l](A[l])
+  A[l] = g[l](Z[l])
   ```
 
 - We can't compute the whole layers forward propagation without a for loop so its OK to have a for loop here.

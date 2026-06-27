@@ -4,49 +4,51 @@ This is the second course of the deep learning specialization at [Coursera](http
 
 ## Table of contents
 
-* [Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization](#improving-deep-neural-networks-hyperparameter-tuning-regularization-and-optimization)
-   * [Table of contents](#table-of-contents)
-   * [Course summary](#course-summary)
-   * [Practical aspects of Deep Learning](#practical-aspects-of-deep-learning)
-      * [Train / Dev / Test sets](#train--dev--test-sets)
-      * [Bias / Variance](#bias--variance)
-      * [Basic Recipe for Machine Learning](#basic-recipe-for-machine-learning)
-      * [Regularization](#regularization)
-      * [Why regularization reduces overfitting?](#why-regularization-reduces-overfitting)
-      * [Dropout Regularization](#dropout-regularization)
-      * [Understanding Dropout](#understanding-dropout)
-      * [Other regularization methods](#other-regularization-methods)
-      * [Normalizing inputs](#normalizing-inputs)
-      * [Vanishing / Exploding gradients](#vanishing--exploding-gradients)
-      * [Weight Initialization for Deep Networks](#weight-initialization-for-deep-networks)
-      * [Numerical approximation of gradients](#numerical-approximation-of-gradients)
-      * [Gradient checking implementation notes](#gradient-checking-implementation-notes)
-      * [Initialization summary](#initialization-summary)
-      * [Regularization summary](#regularization-summary)
-   * [Optimization algorithms](#optimization-algorithms)
-      * [Mini-batch gradient descent](#mini-batch-gradient-descent)
-      * [Understanding mini-batch gradient descent](#understanding-mini-batch-gradient-descent)
-      * [Exponentially weighted averages](#exponentially-weighted-averages)
-      * [Understanding exponentially weighted averages](#understanding-exponentially-weighted-averages)
-      * [Bias correction in exponentially weighted averages](#bias-correction-in-exponentially-weighted-averages)
-      * [Gradient descent with momentum](#gradient-descent-with-momentum)
-      * [RMSprop](#rmsprop)
-      * [Adam optimization algorithm](#adam-optimization-algorithm)
-      * [Learning rate decay](#learning-rate-decay)
-      * [The problem of local optima](#the-problem-of-local-optima)
-   * [Hyperparameter tuning, Batch Normalization and Programming Frameworks](#hyperparameter-tuning-batch-normalization-and-programming-frameworks)
-      * [Tuning process](#tuning-process)
-      * [Using an appropriate scale to pick hyperparameters](#using-an-appropriate-scale-to-pick-hyperparameters)
-      * [Hyperparameters tuning in practice: Pandas vs. Caviar](#hyperparameters-tuning-in-practice-pandas-vs-caviar)
-      * [Normalizing activations in a network](#normalizing-activations-in-a-network)
-      * [Fitting Batch Normalization into a neural network](#fitting-batch-normalization-into-a-neural-network)
-      * [Why does Batch normalization work?](#why-does-batch-normalization-work)
-      * [Batch normalization at test time](#batch-normalization-at-test-time)
-      * [Softmax Regression](#softmax-regression)
-      * [Training a Softmax classifier](#training-a-softmax-classifier)
-      * [Deep learning frameworks](#deep-learning-frameworks)
-      * [TensorFlow](#tensorflow)
-   * [Extra Notes](#extra-notes)
+- [Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization](#improving-deep-neural-networks-hyperparameter-tuning-regularization-and-optimization)
+  - [Table of contents](#table-of-contents)
+  - [Course summary](#course-summary)
+  - [Practical aspects of Deep Learning](#practical-aspects-of-deep-learning)
+    - [Train / Dev / Test sets](#train--dev--test-sets)
+    - [Bias / Variance](#bias--variance)
+    - [Basic Recipe for Machine Learning](#basic-recipe-for-machine-learning)
+    - [Regularization](#regularization)
+    - [Why regularization reduces overfitting?](#why-regularization-reduces-overfitting)
+    - [Dropout Regularization](#dropout-regularization)
+    - [Understanding Dropout](#understanding-dropout)
+    - [Other regularization methods](#other-regularization-methods)
+    - [Normalizing inputs](#normalizing-inputs)
+    - [Vanishing / Exploding gradients](#vanishing--exploding-gradients)
+    - [Weight Initialization for Deep Networks](#weight-initialization-for-deep-networks)
+    - [Numerical approximation of gradients](#numerical-approximation-of-gradients)
+    - [Gradient checking implementation notes](#gradient-checking-implementation-notes)
+    - [Initialization summary](#initialization-summary)
+    - [Regularization summary](#regularization-summary)
+      - [1. L2 Regularization](#1-l2-regularization)
+      - [2. Dropout](#2-dropout)
+  - [Optimization algorithms](#optimization-algorithms)
+    - [Mini-batch gradient descent](#mini-batch-gradient-descent)
+    - [Understanding mini-batch gradient descent](#understanding-mini-batch-gradient-descent)
+    - [Exponentially weighted averages](#exponentially-weighted-averages)
+    - [Understanding exponentially weighted averages](#understanding-exponentially-weighted-averages)
+    - [Bias correction in exponentially weighted averages](#bias-correction-in-exponentially-weighted-averages)
+    - [Gradient descent with momentum](#gradient-descent-with-momentum)
+    - [RMSprop](#rmsprop)
+    - [Adam optimization algorithm](#adam-optimization-algorithm)
+    - [Learning rate decay](#learning-rate-decay)
+    - [The problem of local optima](#the-problem-of-local-optima)
+  - [Hyperparameter tuning, Batch Normalization and Programming Frameworks](#hyperparameter-tuning-batch-normalization-and-programming-frameworks)
+    - [Tuning process](#tuning-process)
+    - [Using an appropriate scale to pick hyperparameters](#using-an-appropriate-scale-to-pick-hyperparameters)
+    - [Hyperparameters tuning in practice: Pandas vs. Caviar](#hyperparameters-tuning-in-practice-pandas-vs-caviar)
+    - [Normalizing activations in a network](#normalizing-activations-in-a-network)
+    - [Fitting Batch Normalization into a neural network](#fitting-batch-normalization-into-a-neural-network)
+    - [Why does Batch normalization work?](#why-does-batch-normalization-work)
+    - [Batch normalization at test time](#batch-normalization-at-test-time)
+    - [Softmax Regression](#softmax-regression)
+    - [Training a Softmax classifier](#training-a-softmax-classifier)
+    - [Deep learning frameworks](#deep-learning-frameworks)
+    - [TensorFlow](#tensorflow)
+  - [Extra Notes](#extra-notes)
 
 ## Course summary
 
@@ -318,7 +320,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
     ```
     eps = 10^-7   # small number
     for i in len(theta):
-      d_theta_approx[i] = (J(theta1,...,theta[i] + eps) -  J(theta1,...,theta[i] - eps)) / 2*eps
+      d_theta_approx[i] = (J(theta1,...,theta[i] + eps) -  J(theta1,...,theta[i] - eps)) / (2*eps)
     ```
   - Finally we evaluate this formula `(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)` (`||` - Euclidean vector norm) and check (with eps = 10^-7):
     - if it is < 10^-7  - great, very likely the backpropagation implementation is correct
@@ -523,8 +525,8 @@ Implications of L2-regularization on:
   	
   	sdW = (beta * sdW) + (1 - beta) * dW^2  # squaring is element-wise
   	sdb = (beta * sdb) + (1 - beta) * db^2  # squaring is element-wise
-  	W = W - learning_rate * dW / sqrt(sdW)
-  	b = B - learning_rate * db / sqrt(sdb)
+    W = W - learning_rate * dW / (sqrt(sdW) + epsilon)
+    b = b - learning_rate * db / (sqrt(sdb) + epsilon)
   ```
 - RMSprop will make the cost function move slower on the vertical direction and faster on the horizontal direction in the following example:
     ![](Images/06-_RMSprop.png)
@@ -540,7 +542,7 @@ Implications of L2-regularization on:
 - Adam optimization simply puts RMSprop and momentum together!
 - Pseudo code:
   ```
-  vdW = 0, vdW = 0
+  vdW = 0, vdb = 0
   sdW = 0, sdb = 0
   on iteration t:
   	# can be mini-batch or batch gradient descent
@@ -559,7 +561,7 @@ Implications of L2-regularization on:
   	sdb = sdb / (1 - beta2^t)      # fixing bias
   					
   	W = W - learning_rate * vdW / (sqrt(sdW) + epsilon)
-  	b = B - learning_rate * vdb / (sqrt(sdb) + epsilon)
+    b = b - learning_rate * vdb / (sqrt(sdb) + epsilon)
   ```
 - Hyperparameters for Adam:
   - Learning rate: needed to be tuned.
@@ -739,7 +741,7 @@ Implications of L2-regularization on:
 
 - There's an activation which is called hard max, which gets 1 for the maximum value and zeros for the others.
   - If you are using NumPy, its `np.max` over the vertical axis.
-- The Softmax name came from softening the values and not harding them like hard max.
+- The Softmax name came from softening the values and not hardening them like hard max.
 - Softmax is a generalization of logistic activation function to `C` classes. If `C = 2` softmax reduces to logistic regression.
 - The loss function used with softmax:
   ```
@@ -753,9 +755,9 @@ Implications of L2-regularization on:
   ```
   dZ[L] = Y_hat - Y
   ```
-- The derivative of softmax is:
+- The derivative of softmax is a Jacobian, but when softmax is paired with cross-entropy loss the backpropagation result simplifies to:
   ```
-  Y_hat * (1 - Y_hat)
+  dZ[L] = Y_hat - Y
   ```
 - Example:
     ![](Images/07-_softmax.png)

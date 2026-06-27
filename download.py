@@ -12,7 +12,7 @@ import pypandoc
 
 def main():
     home_link = "https://raw.githubusercontent.com/mbadry1/DeepLearning.ai-Summary/master/"
-    marks_down_links = {
+    markdown_links = {
         "Deeplearning.ai summary Homepage":
             home_link + "Readme.md",
         "01- Neural Networks and Deep Learning":
@@ -33,14 +33,18 @@ def main():
     print("\n")
 
     # Starting downloading and converting
-    for key, value in marks_down_links.items():
+    for key, value in markdown_links.items():
         print("Converting", key)
-        pypandoc.convert_file(
-            value,
-            'pdf',
-            extra_args=['--pdf-engine=xelatex', '-V', 'geometry:margin=1.5cm'],
-            outputfile=(key + ".pdf")
-        )
+        try:
+            pypandoc.convert_file(
+                value,
+                "pdf",
+                extra_args=["--pdf-engine=xelatex", "-V", "geometry:margin=1.5cm"],
+                outputfile=(key + ".pdf")
+            )
+        except Exception as exc:
+            print("Converting", key, "failed:", exc)
+            continue
         print("Converting", key, "completed")
 
 
