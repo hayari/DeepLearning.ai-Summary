@@ -93,7 +93,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - Name entity recognition (**sequence to sequence**):
     - X: text sequence
     - Y: label sequence
-    - Can be used by seach engines to index different type of words inside a text.
+    - Can be used by search engines to index different type of words inside a text.
 - All of these problems with different input and output (sequence or not) can be addressed as supervised learning with label data X, Y as the training set.
 
 ### Notation
@@ -262,7 +262,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - For computing the word "was", we need to compute the gradient for everything behind. Multiplying fractions tends to vanish the gradient, while multiplication of large number tends to explode it.
   - Therefore some of your weights may not be updated properly.
 
-- In the problem we descried it means that its hard for the network to memorize "was" word all over back to "cat". So in this case, the network won't identify the singular/plural words so that it gives it the right grammar form of verb was/were.
+- In the problem we described it means that its hard for the network to memorize "was" word all over back to "cat". So in this case, the network won't identify the singular/plural words so that it gives it the right grammar form of verb was/were.
 
 - The conclusion is that RNNs aren't good in **long-term dependencies**.
 
@@ -334,7 +334,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - c<sup>~\<t></sup> is the same as a<sup>\<t></sup>
   - u<sup>\<t></sup> is also the same dimensions of a<sup>\<t></sup>
 - The multiplication in the equations are element wise multiplication.
-- What has been descried so far is the Simplified GRU unit. Let's now describe the full one:
+- What has been described so far is the Simplified GRU unit. Let's now describe the full one:
   - The full GRU contains a new gate that is used with to calculate the candidate C. The gate tells you how relevant is C<sup>\<t-1></sup> to C<sup>\<t></sup>
   - Equations:   
     ![](Images/20.png)
@@ -728,7 +728,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - And to do that we multiply:   
     P(y<sup>\<1></sup> | x) * P(y<sup>\<2></sup> | x, y<sup>\<1></sup>) * ... * P(y<sup>\<t></sup> | x, y<sup>\<y(t-1)></sup>)
   - Each probability is a fraction, most of the time a small fraction.
-  - Multiplying small fractions will cause a **numerical overflow**. Meaning that it's too small for the floating part representation in your computer to store accurately.
+  - Multiplying small fractions will cause a **numerical underflow**. Meaning that it's too small for the floating part representation in your computer to store accurately.
   - So in practice we use **summing logs of probabilities** instead of multiplying directly.   
     ![](Images/57.png)
   - But there's another problem. The two optimization functions we have mentioned are preferring small sequences rather than long ones. Because multiplying more fractions gives a smaller value, so fewer fractions - bigger result.
@@ -824,7 +824,7 @@ Here are the course summary as its given on the course [link](https://www.course
     -  Blue is the normal model, while green is the model with attention mechanism.
 - In this section we will give just some intuitions about the attention model and in the next section we will discuss it's details.
 - At first the attention model was developed for machine translation but then other applications used it like computer vision and new architectures like Neural Turing machine.
-- The attention model was descried in this paper:
+- The attention model was described in this paper:
   - [Bahdanau et. al., 2014. Neural machine translation by jointly learning to align and translate](https://arxiv.org/abs/1409.0473)
 - Now for the intuition:
   - Suppose that our encoder is a bidirectional RNN:
@@ -850,7 +850,7 @@ Here are the course summary as its given on the course [link](https://www.course
   ![](Images/71.png)
 - Lets see how can we compute the attention weights:
   - So alpha<sup>\<t, t'></sup> = amount of attention y<sup>\<t></sup> should pay to a<sup>\<t'></sup>
-    - Like for example we payed attention to the first three words through alpha<sup>\<1,1></sup>, alpha<sup>\<1,2></sup>, alpha<sup>\<1,3></sup>
+    - Like for example we paid attention to the first three words through alpha<sup>\<1,1></sup>, alpha<sup>\<1,2></sup>, alpha<sup>\<1,3></sup>
   - We are going to softmax the attention weights so that their sum is 1:   
     ![](Images/72.png)
   - Now we need to know how to calculate e<sup>\<t, t'></sup>. We will compute e using a small neural network (usually 1-layer, because we will need to compute this a lot):   
@@ -880,7 +880,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - In the past days, speech recognition systems were built using _phonemes_ that are a hand engineered basic units of sound.  Linguists used to hypothesize that writing down audio in terms of these basic units of sound called _phonemes_ would be the best way to do speech recognition.
   - End-to-end deep learning found that phonemes was no longer needed. One of the things that made this possible is the large audio datasets.
   - Research papers have around 300 - 3000 hours of training data while the best commercial systems are now trained on over 100,000 hours of audio.
-- You can build an accurate speech recognition system using the attention model that we have descried in the previous section:   
+- You can build an accurate speech recognition system using the attention model that we have described in the previous section:
   ![](Images/77.png)
 - One of the methods that seem to work well is _CTC cost_ which stands for "Connectionist temporal classification" 
   - To explain this let's say that Y = "the quick brown fox"

@@ -172,7 +172,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - In case `(n+2p-f)/s + 1` is fraction we can take **floor** of this value.
 
-- In math textbooks the conv operation is filpping the filter before using it. What we were doing is called cross-correlation operation but the state of art of deep learning is using this as conv operation.
+- In math textbooks the conv operation is flipping the filter before using it. What we were doing is called cross-correlation operation but the state of art of deep learning is using this as conv operation.
 
 - Same convolutions is a convolution with a padding so that output size is the same as the input size. Its given by the equation:
 
@@ -221,7 +221,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   Input:  n[l-1] x n[l-1] x nc[l-1]	Or	 nH[l-1] x nW[l-1] x nc[l-1]
   Output: n[l] x n[l] x nc[l]	Or	 nH[l] x nW[l] x nc[l]
-  Where n[l] = (n[l-1] + 2p[l] - f[l] / s[l]) + 1
+  Where n[l] = floor((n[l-1] + 2p[l] - f[l]) / s[l]) + 1
 
   Each filter is: f[l] x f[l] x nc[l-1]
 
@@ -253,9 +253,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - `number of filters = 40`
     - The output are `a3 = 7x7x40`
       - `n3 = 7`, `nc3 = 40`
-  - Forth layer (Fully connected Softmax)
+  - Fourth layer (Fully connected Softmax)
     - `a3 = 7x7x40 = 1960`  as a vector..
-- In the last example you seen that the image are getting smaller after each layer and thats the trend now.
+- In the last example you seen that the image are getting smaller after each layer and that's the trend now.
 - Types of layer in a convolutional network:
   - Convolution. 		`#Conv`
   - Pooling      `#Pool`
@@ -306,7 +306,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Third layer (Fully connected)   `#FC3`
     - Number of neurons are 120
     - The output `a3 = 120 x 1` . 400 came from `5x5x16`
-  - Forth layer (Fully connected)  `#FC4`
+  - Fourth layer (Fully connected)  `#FC4`
     - Number of neurons are 84
     - The output `a4 = 84 x 1` .
   - Fifth layer (Softmax)
@@ -1170,7 +1170,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 #### Siamese Network
 
-- We will implement the similarity function using a type of NNs called Siamease Network in which we can pass multiple inputs to the two or more networks with the same architecture and parameters.
+- We will implement the similarity function using a type of NNs called Siamese Network in which we can pass multiple inputs to the two or more networks with the same architecture and parameters.
 - Siamese network architecture are as the following:
   - ![](Images/35.png)
   - We make 2 identical conv nets which encodes an input image into a vector. In the above image the vector shape is (128, )
@@ -1219,7 +1219,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - ![](Images/36.png)
   - The final layer is a sigmoid layer.
   - `Y' = wi * Sigmoid ( f(x(i)) - f(x(j)) ) + b` where the subtraction is the Manhattan distance between f(x(i)) and f(x(j))
-  - Some other similarities can be Euclidean and Ki square similarity.
+  - Some other similarities can be Euclidean and chi-square similarity.
   - The NN here is Siamese means the top and bottom convs has the same parameters.
 - The paper for this work: [[Taigman et. al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 - A good performance/deployment trick:
@@ -1270,7 +1270,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   1. Initiate G randomly
      - For example G: 100 X 100 X 3
   2. Use gradient descent to minimize `J(G)`
-     - `G = G - dG`  We compute the gradient image and use gradient decent to minimize the cost function.
+     - `G = G - dG`  We compute the gradient image and use gradient descent to minimize the cost function.
 - The iterations might be as following image:
   - To Generate this:
     - ![](Images/40.png)
@@ -1309,7 +1309,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - ![](Images/43.png)
     - As it appears its the sum of the multiplication of each member in the matrix.
 - To compute gram matrix efficiently:
-  - Reshape activation from H X W X C to HW X C
+  - Reshape activation from H X W X C to C X HW
   - Name the reshaped activation F.
   - `G[l] = F * F.T`
 - Finally the cost function will be as following:
@@ -1377,7 +1377,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
      - You can add a validation set while training too.
   4. Test the model on test data by calling `model.evaluate(x = ..., y = ...)`
 - Summarize of step in Keras: Create->Compile->Fit/Train->Evaluate/Test
-- `Model.summary()` gives a lot of useful informations regarding your model including each layers inputs, outputs, and number of parameters at each layer.
+- `Model.summary()` gives a lot of useful information regarding your model including each layers inputs, outputs, and number of parameters at each layer.
 - To choose the Keras backend you should go to `$HOME/.keras/keras.json` and change the file to the desired backend like Theano or Tensorflow or whatever backend you want.
 - After you create the model you can run it in a tensorflow session without compiling, training, and testing capabilities.
 - You can save your model with `model_save` and load your model using `model_load ` This will save your whole trained model to disk with the trained weights.

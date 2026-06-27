@@ -247,7 +247,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
   2. Subtract the mean from each input: `X = X - mean`
      - This makes your inputs centered around 0.
   3. Get the variance of the training set: `variance = (1/m) * sum(x(i)^2)`
-  4. Normalize the variance. `X /= variance`
+  4. Normalize by the standard deviation. `X /= np.sqrt(variance)`
 - These steps should be applied to training, dev, and testing sets (but using mean and variance of the train set).
 - Why normalize?
   - If we don't normalize the inputs our cost function will be deep and its shape will be inconsistent (elongated) then optimizing it will take a long time.
@@ -318,7 +318,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
     ```
     eps = 10^-7   # small number
     for i in len(theta):
-      d_theta_approx[i] = (J(theta1,...,theta[i] + eps) -  J(theta1,...,theta[i] - eps)) / 2*eps
+      d_theta_approx[i] = (J(theta1,...,theta[i] + eps) -  J(theta1,...,theta[i] - eps)) / (2*eps)
     ```
   - Finally we evaluate this formula `(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)` (`||` - Euclidean vector norm) and check (with eps = 10^-7):
     - if it is < 10^-7  - great, very likely the backpropagation implementation is correct
@@ -523,8 +523,8 @@ Implications of L2-regularization on:
   	
   	sdW = (beta * sdW) + (1 - beta) * dW^2  # squaring is element-wise
   	sdb = (beta * sdb) + (1 - beta) * db^2  # squaring is element-wise
-  	W = W - learning_rate * dW / sqrt(sdW)
-  	b = B - learning_rate * db / sqrt(sdb)
+    W = W - learning_rate * dW / (sqrt(sdW) + epsilon)
+    b = b - learning_rate * db / (sqrt(sdb) + epsilon)
   ```
 - RMSprop will make the cost function move slower on the vertical direction and faster on the horizontal direction in the following example:
     ![](Images/06-_RMSprop.png)
@@ -540,7 +540,7 @@ Implications of L2-regularization on:
 - Adam optimization simply puts RMSprop and momentum together!
 - Pseudo code:
   ```
-  vdW = 0, vdW = 0
+  vdW = 0, vdb = 0
   sdW = 0, sdb = 0
   on iteration t:
   	# can be mini-batch or batch gradient descent
@@ -559,7 +559,7 @@ Implications of L2-regularization on:
   	sdb = sdb / (1 - beta2^t)      # fixing bias
   					
   	W = W - learning_rate * vdW / (sqrt(sdW) + epsilon)
-  	b = B - learning_rate * vdb / (sqrt(sdb) + epsilon)
+    b = b - learning_rate * vdb / (sqrt(sdb) + epsilon)
   ```
 - Hyperparameters for Adam:
   - Learning rate: needed to be tuned.
@@ -739,7 +739,7 @@ Implications of L2-regularization on:
 
 - There's an activation which is called hard max, which gets 1 for the maximum value and zeros for the others.
   - If you are using NumPy, its `np.max` over the vertical axis.
-- The Softmax name came from softening the values and not harding them like hard max.
+- The Softmax name came from softening the values and not hardening them like hard max.
 - Softmax is a generalization of logistic activation function to `C` classes. If `C = 2` softmax reduces to logistic regression.
 - The loss function used with softmax:
   ```
@@ -753,9 +753,9 @@ Implications of L2-regularization on:
   ```
   dZ[L] = Y_hat - Y
   ```
-- The derivative of softmax is:
+- The derivative of softmax is a Jacobian, but when softmax is paired with cross-entropy loss the backpropagation result simplifies to:
   ```
-  Y_hat * (1 - Y_hat)
+  dZ[L] = Y_hat - Y
   ```
 - Example:
     ![](Images/07-_softmax.png)

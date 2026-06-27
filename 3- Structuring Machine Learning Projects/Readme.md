@@ -96,7 +96,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - **Precision**: percentage of true cats in the recognized result: P = 3/(3 + 1) 
   - **Recall**: percentage of true recognition cat of the all cat predictions: R = 3/(3 + 2)
   - **Accuracy**: (3+4)/10
-- Using a precision/recall for evaluation is good in a lot of cases, but separately they don't tell you which algothims is better. Ex:
+- Using a precision/recall for evaluation is good in a lot of cases, but separately they don't tell you which algorithm is better. Ex:
 
   | Classifier | Precision | Recall |
   | ---------- | --------- | ------ |
@@ -218,7 +218,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 ### Improving your model performance
 
-- The two fundamental asssumptions of supervised learning:
+- The two fundamental assumptions of supervised learning:
   1. You can fit the training set pretty well. This is roughly saying that you can achieve low **avoidable bias**. 
   2. The training set performance generalizes pretty well to the dev/test set. This is roughly saying that **variance** is not too bad.
 - To improve your deep learning supervised system follow these guidelines:

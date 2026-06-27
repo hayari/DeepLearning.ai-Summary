@@ -1,6 +1,6 @@
 # Notebooks headers
 
-In this document, i present the whole notebook assignments headers of [deeplearning.ai](https://deeplearning.ai). It may help someone know the code contents of the course or to fast check the applications the courses has dealt with.
+In this document, I present the whole notebook assignments headers of [deeplearning.ai](https://deeplearning.ai). It may help someone know the code contents of the course or to fast check the applications the courses has dealt with.
 
 ## Table of contents
 
@@ -273,7 +273,7 @@ Recurrent Neural Networks (RNN) are very effective for Natural Language Processi
 We assume that you are already familiar with `numpy` and/or have completed the previous courses of the specialization. Let's get started!
 
 ### Dinosaur Island -- Character-level language model
-Welcome to Dinosaurus Island! 65 million years ago, dinosaurs existed, and in this assignment they are back. You are in charge of a special task. Leading biology researchers are creating new breeds of dinosaurs and bringing them to life on earth, and your job is to give names to these dinosaurs. If a dinosaur does not like its name, it might go beserk, so choose wisely! 
+Welcome to Dinosaurus Island! 65 million years ago, dinosaurs existed, and in this assignment they are back. You are in charge of a special task. Leading biology researchers are creating new breeds of dinosaurs and bringing them to life on earth, and your job is to give names to these dinosaurs. If a dinosaur does not like its name, it might go berserk, so choose wisely!
 <br />
 Luckily you have learned some deep learning and you will use it to save the day. Your assistant has collected a list of all the dinosaur names they could find, and compiled them into this [dataset](dinos.txt). (Feel free to take a look by clicking the previous link.) To create new dinosaur names, you will build a character level language model to generate new names. Your algorithm will learn the different name patterns, and randomly generate new names. Hopefully this algorithm will keep you and your team safe from the dinosaurs' wrath! 
 
@@ -309,7 +309,7 @@ Lets get started! Run the following cell to load the package you are going to us
 ### Word Vector Representation
 Welcome to your first assignment of this week! 
 
-Because word embeddings are very computionally expensive to train, most ML practitioners will load a pre-trained set of embeddings. 
+Because word embeddings are very computationally expensive to train, most ML practitioners will load a pre-trained set of embeddings.
 
 **After this assignment you will be able to:**
 
